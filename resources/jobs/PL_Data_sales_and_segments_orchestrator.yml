@@ -1,0 +1,15 @@
+resources:
+  jobs:
+    PL_Data_sales_and_segments_orchestrator:
+      name: PL_Data_sales_and_segments_orchestrator
+      tasks:
+        - task_key: run_segments_gold
+          depends_on:
+            - task_key: run_sales_silver
+          run_job_task:
+            job_id: 'placeholder_id'
+        - task_key: run_sales_silver
+          run_job_task:
+            job_id: 'placeholder_id'
+      queue:
+        enabled: true
