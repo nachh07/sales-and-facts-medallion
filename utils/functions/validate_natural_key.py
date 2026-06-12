@@ -4,7 +4,7 @@ from pyspark.sql import DataFrame
 from pyspark.sql.utils import AnalysisException
 from pyspark.sql.functions import col, concat_ws
 
-def validate_natural_key(dataframe_and_key: Dict[DataFrame, List[str]]) -> None:
+def validate_natural_key_df(dataframe_and_key: Dict[DataFrame, List[str]]) -> None:
  
     logger = logging.getLogger(__name__)
     logging.basicConfig(level=logging.INFO)
