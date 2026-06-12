@@ -1,0 +1,16 @@
+resources:
+  jobs:
+    PL_Data_Sales_silver:
+      name: PL_Data_Sales_silver
+      tasks:
+        - task_key: run_sales_pipeline
+          notebook_task:
+            notebook_path: pipelines/sales_pipeline_silver
+            source: GIT
+      git_source:
+        git_url: https://github.com/nachh07/sales-and-facts-medallion.git
+        git_provider: gitHub
+        git_branch: main
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
