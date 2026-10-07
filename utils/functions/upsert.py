@@ -1,7 +1,8 @@
 import logging
+from pyspark.sql import SparkSession
 from pyspark.sql.dataframe import DataFrame
 from pyspark.errors import AnalysisException
-from delta.tables import DeltaTable
+from delta.tables import *
 
 
 def upsert_data(df: DataFrame, table_name: str) -> None:
@@ -36,7 +37,7 @@ def upsert_data(df: DataFrame, table_name: str) -> None:
         if "TABLE_OR_VIEW_ALREADY_EXISTS" in err.getErrorClass():
             logger.info(f"[{table_name}] Tabla existente — ejecutando MERGE (upsert)...")
 
-            target_delta_table = DeltaTable.forName(spark, table_name)
+            target_delta_table = DeltaTable.forName(SparkSession.builder.getActiveSession(), table_name)
 
             update_cols = {
                 f"target.{col}": f"source.{col}"
